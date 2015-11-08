@@ -1,0 +1,12 @@
+-module(test1).
+%-compile(export_all).
+-export([start/1]).
+-export([loop/1]).
+start(Node)->
+        spawn(Node,test1,loop,[]).
+loop()->
+        receive
+           Anything->
+                erlang:display([self(),Anything]),
+                loop()
+          end.
